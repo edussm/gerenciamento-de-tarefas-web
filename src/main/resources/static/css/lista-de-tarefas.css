@@ -1,0 +1,10 @@
+#lista-tarefas {
+	width: 100%;
+}
+#lista-tarefas td, #lista-tarefas th {
+	text-align: center;
+}
+.concluido-true {
+	text-decoration: line-through;
+	color: green;
+}
