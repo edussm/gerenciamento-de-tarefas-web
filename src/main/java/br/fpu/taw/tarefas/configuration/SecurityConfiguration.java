@@ -27,15 +27,18 @@ import org.springframework.web.util.WebUtils;
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-//		http.httpBasic()
-//			.and().authorizeRequests()
-//				.antMatchers("/index.html", "/", "/login", "/message", "/home", "/console", "/api")
-//				.permitAll().anyRequest().authenticated()
-//			.and().csrf().csrfTokenRepository(csrfTokenRepository())
-//			.and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
-		http.httpBasic();
-		http.authorizeRequests().anyRequest().fullyAuthenticated();
-		http.csrf().disable();
+		http.httpBasic()
+			.and().authorizeRequests()
+				.antMatchers("/index.html", "/", "/tarefas", "/console", "/api/*")
+				.permitAll().anyRequest().authenticated()
+			.and().authorizeRequests()
+				.antMatchers("/login","/user")
+				.permitAll().anyRequest().permitAll()
+			.and().formLogin().loginPage("/login")
+			.and().csrf().csrfTokenRepository(csrfTokenRepository())
+			.and().addFilterAfter(csrfHeaderFilter(), CsrfFilter.class);
+
+		//http.csrf().disable();
 	}
 
 	@Override
